@@ -1,3 +1,8 @@
+import { Banner } from './components/Banner.jsx';
+import { CourseList } from './components/CourseList.jsx';
+import { useState } from 'react';
+import './App.css';
+
 const schedule = {
   "title": "CS Courses for 2018-2019",
   "courses": {
@@ -30,13 +35,21 @@ const schedule = {
 
 
 const App = () => {
+
   return (
-    <h1> {schedule.title} </h1>
     
-  );
+    <div className='container'>
+      <Banner title = {schedule.title}/>
+
+      { Object.entries(schedule.courses).map(([id, course]) => <CourseList key={id} course={course} />) }
+    </div>
+
+  )   
 };
 
+
 export default App;
+
 /*
 
 import { useState } from 'react';
