@@ -9,6 +9,8 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.10.3",
+    "bootstrap": "^5.2.2",
     "plugins": "^0.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
