@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Banner } from './components/Banner.jsx';
-import { CourseList } from './components/CourseList.jsx';
 import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useJsonQuery } from './utilities/fetch.js';
+import { TermPage } from './components/TermPage.jsx';
 
 const queryClient = new QueryClient();
 
@@ -17,11 +17,7 @@ const Main = () => {
   return (
     <div className='container'>
       <Banner title = {data.title}/>
-        <div className="row">
-          <div className="col-sm-6">
-          { Object.entries(data.courses).map(([id, course]) => <CourseList key={id} course={course} />) }
-          </div>
-        </div>
+      <TermPage data = {data}/>
     </div>
   )
 }
