@@ -3,24 +3,24 @@
   import 'C:/Users/samj9/Desktop/samj_courseapp/src/App.css';
   import { ScheduleModal } from './ScheduleModal';
   import { createTimeConflictList } from '../utilities/time';
-  import { CourseFormButton } from './CourseFormButton';
+  import { CourseFormButton } from './CourseForm';
   
   const terms = ['Fall', 'Winter', 'Spring'];
   var timeConflicts = [];
   
   //CourseList Component
   export const CourseList = ({key, selection, course, toggleSelected, selected, timeConflicts}) => {
-      console.log(timeConflicts);
       if (selection == 0) { selection = "Fall";}
       if (course.term == selection) {
+      //Make it so clicking the edit button doesn't trigger the toogledSelected function
       return (
-        <div style = { timeConflicts.includes(course) ? {display: "none"}: {display:"block"}} className={`card m-1 p-2 ${selected.includes(course) ? 'bg-secondary' : ''}`} onClick={() => toggleSelected(course)}>
+        <div style = { timeConflicts.includes(course) ? {backgroundColor: "darkred", pointerEvents:"none"}: {backgroundColor: "white", pointerEvents:"auto"}} className={`card m-1 p-2 ${selected.includes(course) ? 'bg-secondary' : ''}`} onClick={() => toggleSelected(course)}>
                 <div className="card-body">
                     <h5 className="card-title">{course.term} CS{course.number}</h5>
                     <p className="card-text">{course.title}</p>
                     <p className='card-footer bg-transparent'>{course.meets}</p>
-            </div>
-            <CourseFormButton course = {course} />
+                    <CourseFormButton course = {course} />
+              </div>
         </div>
       )
       }
@@ -56,7 +56,6 @@
     )
     
     timeConflicts = createTimeConflictList(course, data.courses);
-    console.log(timeConflicts);
     }
     
     //Make it so that schedule button is further to the right of the page

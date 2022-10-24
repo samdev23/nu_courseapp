@@ -3,6 +3,8 @@ import { Banner } from './components/Banner.jsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useJsonQuery } from './utilities/fetch.js';
 import { TermPage } from './components/TermPage.jsx';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { CourseForm } from './components/CourseForm.jsx';
 
 const queryClient = new QueryClient();
 
@@ -23,11 +25,28 @@ const Main = () => {
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className='container'>
-          <Main/>
-      </div>
-    </QueryClientProvider>
+
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/editCourse"
+            element={
+              <div><CourseForm/></div>
+            }
+          ></Route>
+
+          <Route
+            path="/"
+            element={
+              <QueryClientProvider client={queryClient}>
+              <div className='container'>
+                  <Main/>
+              </div>
+              </QueryClientProvider>
+            }
+          ></Route>
+          </Routes>
+        </BrowserRouter>
   )   
 };
 
