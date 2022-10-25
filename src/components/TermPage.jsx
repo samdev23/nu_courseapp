@@ -9,7 +9,7 @@
   var timeConflicts = [];
   
   //CourseList Component
-  export const CourseList = ({key, selection, course, toggleSelected, selected, timeConflicts}) => {
+  export const CourseList = ({course_key, selection, course, toggleSelected, selected, timeConflicts}) => {
       if (selection == 0) { selection = "Fall";}
       if (course.term == selection) {
       //Make it so clicking the edit button doesn't trigger the toogledSelected function
@@ -19,7 +19,7 @@
                     <h5 className="card-title">{course.term} CS{course.number}</h5>
                     <p className="card-text">{course.title}</p>
                     <p className='card-footer bg-transparent'>{course.meets}</p>
-                    <CourseFormButton course = {course} />
+                    <CourseFormButton course = {course} course_key = {course_key} />
               </div>
         </div>
       )
@@ -64,7 +64,7 @@
           <TermSelector selection={selection} setSelection={setSelection} />
           <ScheduleModal selectedCourses = {selected} />
           <div className="course-list">
-              { Object.entries(data.courses).map(([id, course]) => <CourseList selection = {selection} key={id} course={course} toggleSelected = {toggleSelected} selected = {selected} timeConflicts = {timeConflicts}/>) }
+              { Object.entries(data.courses).map(([id, course]) => <CourseList selection = {selection} course_key={id} course={course} toggleSelected = {toggleSelected} selected = {selected} timeConflicts = {timeConflicts}/>) }
           </div>
       </div>
   )

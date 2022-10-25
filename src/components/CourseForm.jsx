@@ -2,17 +2,19 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
+import { useDbUpdate } from "../utilities/firebase";
 
 var course_obj;
+var courseObj_key;
 
 
-const setCourse = (course) => {course_obj = course;}
+const setCourse = (course, course_key) => {course_obj = course; courseObj_key = course_key}
 
-export const CourseFormButton = ({course}) => {
+export const CourseFormButton = ({course, course_key}) => {
     const navigate = useNavigate();
 
     return (
-        <button className="btn btn-dark" onClick={evt => {navigate("/editCourse"), setCourse(course)}}>
+        <button className="btn btn-dark" onClick={evt => {navigate("/editCourse"), setCourse(course, course_key)}}>
         Edit Course
         </button>
     );
@@ -72,7 +74,7 @@ const useFormData = (validator = null, values = {}) => {
     return [state, change];
   };
 
-const validateUserData = (key, val) => {
+const validateCourseData = (key, val) => {
     switch (key) {
       case 'courseTitle':
         return /(^\w\w)/.test(val) ? '' : 'must be least two characters';
@@ -97,27 +99,26 @@ const validateUserData = (key, val) => {
   const ButtonBar = ({message, disabled}) => {
     const navigate = useNavigate();
 
-    //<span className="p-2">{message}</span>
+    
     return (
       <div className="d-flex">
         <button type="button" className="btn btn-outline-dark me-2" onClick={() => navigate("/")}>Cancel</button>
         <button type="submit" className="btn btn-primary me-auto" disabled={disabled}>Submit</button>
+        <span className="p-2">{message}</span>
       </div>
     );
   };
   
-  export const CourseForm = ({user}) => {
-    //const [update, result] = useDbUpdate(`/users/${user.id}`);
-    const [state, change] = useFormData(validateUserData, user);
+  export const CourseForm = () => {
+    console.log(courseObj_key);
+    const [update, result] = useDbUpdate(`/course/${course_obj.id}`);
+    const [state, change] = useFormData(validateCourseData, course_obj);
     const course_meets = course_obj.meets.trim().split(/\s+/);
     const OnSubmit = (evt) => {
-    /*
       evt.preventDefault();
       if (!state.errors) {
         update(state.values);
       }
-    */
-      console.log("Not finished");
     };
     
     return (
@@ -125,7 +126,7 @@ const validateUserData = (key, val) => {
         <InputField name="courseTitle" defaultValue={course_obj.title} text = "Course Title" state={state} change={change} />
         <InputField name="courseDays" defaultValue={course_meets[0]}  text = "Course Meeting Days" state={state} change={change} />
         <InputField name="courseTimes" defaultValue={course_meets[1]} text = "Course Meeting Times" state={state} change={change} />
-        <ButtonBar /*message={result?.message}*/ />
+        <ButtonBar message={result?.message} />
       </form>
     )
   };
