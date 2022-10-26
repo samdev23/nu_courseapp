@@ -547,5 +547,9 @@
             "meets": "TuTh 15:30-16:50",
             "title": "Graduate Algorithms"
         }
+    },
+
+    "admins": {
+        "piWH1ttMioRPsv1CbsfeM2TlhLy1": true
     }
 }

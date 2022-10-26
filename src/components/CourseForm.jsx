@@ -10,13 +10,18 @@ var courseObj_key;
 
 const setCourse = (course, course_key) => {course_obj = course; courseObj_key = course_key}
 
-export const CourseFormButton = ({course, course_key}) => {
+export const CourseFormButton = ({profile, course, course_key}) => {
     const navigate = useNavigate();
 
     return (
-        <button className="btn btn-dark" onClick={evt => {navigate("/editCourse"), setCourse(course, course_key)}}>
-        Edit Course
-        </button>
+      <div>
+        {
+          profile?.isAdmin && 
+          <button className="btn btn-dark" onClick={evt => {navigate("/editCourse"), setCourse(course, course_key)}}>
+          Edit Course
+          </button>
+        }
+      </div>
     );
 };
 
