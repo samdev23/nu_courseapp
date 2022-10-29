@@ -25,43 +25,6 @@ export const CourseFormButton = ({profile, course, course_key}) => {
     );
 };
 
-/*
-const OnSubmit = () => {};
-
-export const CourseForm = () => {
-    const course_meets = course_obj.meets.trim().split(/\s+/);
-    const navigate = useNavigate();
-
-    return (
-        <Form className="p-3" onSubmit={OnSubmit()}>
-          <h3>Edit a Course</h3>
-
-        <Form.Group className="mb-3" controlId="courseTitle">
-            <Form.Label>Course Title</Form.Label>
-            <Form.Control type="text" defaultValue = {course_obj.title}/>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="courseDays">
-            <Form.Label>Course Meeting Days</Form.Label>
-            <Form.Control type="text" defaultValue = {course_meets[0]}/>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="courseTimes">
-            <Form.Label>Course Meeting Times</Form.Label>
-            <Form.Control type="text" defaultValue = {course_meets[1]}/>
-        </Form.Group>
-
-        <Button variant="secondary" onClick={() => navigate("/")}>
-            Cancel
-        </Button>{" "}
-
-        <Button variant="primary" type="submit">
-            Submit
-        </Button>
-
-        </Form>
-      );
-};
-*/
-
 const useFormData = (validator = null, values = {}) => {
     const [state, setState] = useState(() => ({ values }));
   

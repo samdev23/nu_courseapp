@@ -1,4 +1,5 @@
 const conflicts = [];
+const addedCourses = [];
 
 const isTermConflict = (termOne, termTwo) => {return termOne == termTwo};
 
@@ -7,16 +8,10 @@ const isDayConflict = (daysOne, daysTwo) => {return daysOne.includes(daysTwo)};
 const isTimeConflict = (timesOne, timesTwo) => { 
 
     if ((timesOne[0] <= timesTwo[0]) && (timesTwo[0] <= timesOne[1])){
-        // console.log((timesOne[0] < timesTwo[0]) && (timesTwo[0] < timesOne[1]));
-        // console.log(timesOne);
-        // console.log(timesTwo);
         return true;
     }
 
     if ((timesOne[0] <= timesTwo[1]) && (timesTwo[1] <= timesOne[1])){
-        // console.log((timesOne[0] < timesTwo[1]) && (timesTwo[1] < timesOne[1]));
-        // console.log(timesOne);
-        // console.log(timesTwo);
         return true;
     }
 
@@ -59,11 +54,21 @@ export const createTimeConflictList = (course, courses) => {
 
     for (const [key, value] of Object.entries(courses)){
         if (isMeetingConflict(course, value)){
-            conflicts.includes(value) 
-            ? conflicts.splice(conflicts.indexOf(value), 1)
-            : conflicts.push(value);
+            if (addedCourses.includes(course)) {
+                conflicts.splice(conflicts.indexOf(value), 1);
+            }
+            else {
+                conflicts.push(value);
+            }
         }
     }
 
+    if (addedCourses.includes(course)) {
+        addedCourses.splice(addedCourses.indexOf(course), 1);
+    }
+    else {
+        addedCourses.push(course);
+    }
+
     return conflicts;
-}
+};

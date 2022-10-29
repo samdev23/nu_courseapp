@@ -27,6 +27,7 @@ const ScheduleDialog = ({children, open, close}) => (
 
 const CourseCart = ({selectedCourses}) => (
     <div className = 'Cart'>
+      <h5>Your Course Schedule</h5>
       {
         selectedCourses.length === 0
         ? <h5>No courses have been selected. Please select a course card to see your selections here.</h5>
@@ -47,7 +48,7 @@ export const ScheduleModal = ({selectedCourses}) => {
   
     return (
         <div>
-        <button className="btn btn-outline-dark" onClick={openModal}><i className="bi bi-book"></i></button>
+        <button className="btn btn-outline-dark me-auto" onClick={openModal}><i className="bi bi-book"></i></button>
         <ScheduleDialog open={open} close={closeModal}>
             <CourseCart selectedCourses={selectedCourses} />
         </ScheduleDialog>
