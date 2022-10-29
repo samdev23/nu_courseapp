@@ -6,33 +6,27 @@ import { TermPage } from './components/TermPage.jsx';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CourseForm } from './components/CourseForm.jsx';
 import { useDbData, useProfile } from './utilities/firebase.js';
-import Navigation from './components/Navigation.jsx';
 
 const queryClient = new QueryClient();
 
 const Main = ({profile}) => {
-  //const [data, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
   const [data, error] = useDbData('/');
 
-  //<QueryClientProvider client={queryClient}><div className='Container'><Main/></div></QueryClientProvider>
-
   if (error) return <h1>Error loading user data: {`${error}`}</h1>;
-  //if (isLoading) return <h1>Loading user data...</h1>;
   if (data === undefined) return <h1>Loading user data...</h1>;
   if (!data) return <h1>No user data found</h1>;
 
   /*
   Bugs:
-    Clicking multiple courses will deselected some that have time conflicts
+    There is a disconnect between what firebase shows and what the localhost shows
+                  No idea why this is happening 
+                  
+    General reformat buttons to fit better on screen (standardize card size, sign in/sign out button, schedule button, term buttons)
 
-    Clicking edit button counts as a course selection without keeping track of course
-
-    General reformat buttons to fit better on screen.
   */
 
   return (
     <div className='container'>
-      <Navigation/>
       <Banner title = {data.title}/>
       <TermPage profile = {profile} data = {data}/>
     </div>
