@@ -4,6 +4,7 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
+    "cy:open": "cypress open",
     "build": "vite build",
     "serve": "vite preview",
     "test": "vitest"
