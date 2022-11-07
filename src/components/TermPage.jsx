@@ -15,7 +15,7 @@
       if (course.term == selection) {
 
       return (
-        <div style = { timeConflicts.includes(course) ? {backgroundColor: "darkred", pointerEvents:"none"}: {backgroundColor: "white", pointerEvents:"auto"}} className={`card m-1 p-2 ${selected.includes(course) ? 'bg-secondary' : ''}`} >
+        <div data-cy="course" style = { timeConflicts.includes(course) ? {backgroundColor: "darkred", pointerEvents:"none"}: {backgroundColor: "white", pointerEvents:"auto"}} className={`card m-1 p-2 ${selected.includes(course) ? 'bg-secondary' : ''}`} >
                 <div className="card-body">
                     <h5 className="card-title">{course.term} CS{course.number}</h5>
                     <p className="card-text">{course.title}</p>

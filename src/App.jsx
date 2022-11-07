@@ -16,15 +16,6 @@ const Main = ({profile}) => {
   if (data === undefined) return <h1>Loading user data...</h1>;
   if (!data) return <h1>No user data found</h1>;
 
-  /*
-  Bugs:
-    There is a disconnect between what firebase shows and what the localhost shows
-                  No idea why this is happening 
-                  
-    General reformat buttons to fit better on screen (standardize card size, sign in/sign out button, schedule button, term buttons)
-
-  */
-
   return (
     <div className='container'>
       <Banner title = {data.title}/>
